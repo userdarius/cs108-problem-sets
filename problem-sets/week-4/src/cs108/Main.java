@@ -10,7 +10,10 @@ public final class Main {
     public static void main(String[] args) {
         // L'image à afficher, à modifier au fur et à mesure de
         // votre avancement.
-        ImageRGB image = RedDisk.IMAGE;
+        Image<ColorRGB> image = new Composed(
+                RedDisk.IMAGE,
+                new Rotated<>(new Chessboard(ColorRGB.BLACK, ColorRGB.WHITE, 1), Math.toRadians(10)),
+                HorizontalGradientMask.IMAGE);
 
         invokeLater(() -> {
             try {
@@ -31,11 +34,11 @@ public final class Main {
 
     @SuppressWarnings("serial")
     private static final class ImageComponent extends JComponent {
-        private final ImageRGB image;
+        private final Image<ColorRGB> image;
         private final double centerX, centerY;
         private final double width;
 
-        public ImageComponent(ImageRGB image, double centerX, double centerY, double width) {
+        public ImageComponent(Image<ColorRGB> image, double centerX, double centerY, double width) {
             this.image = image;
             this.centerX = centerX;
             this.centerY = centerY;
@@ -44,7 +47,7 @@ public final class Main {
 
         @Override
         public Dimension getPreferredSize() {
-            return new Dimension(400, 280);
+            return new Dimension(200, 140);
         }
 
         @Override
