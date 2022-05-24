@@ -17,6 +17,7 @@ public final class Chessboard implements Image<ColorRGB> {
     @Override
     public ColorRGB apply(double x, double y) {
         int sqX = (int)floor(x / w), sqY = (int)floor(y / w);
-        return (sqX + sqY) % 2 == 0 ? c1 : c2;
+        if ((sqX + sqY) % 2 == 0) return c1;
+        return c2;
     }
 }
